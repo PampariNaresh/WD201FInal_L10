@@ -54,13 +54,13 @@ describe("Todo test cases ", () => {
     expect(res.statusCode).toBe(302);
   });
 
-  test("Create new todo", async () => {
+  test("Creating new todo", async () => {
     const agent = request.agent(server);
     await login(agent, "user.a@test.com", "123456789");
     const res = await agent.get("/todos");
     const csrfToken = extractCsrfToken(res);
     const response = await agent.post("/todos").send({
-      title: "Go to movie",
+      title: "Going to movie",
       dueDate: new Date().toISOString(),
       completed: false,
       _csrf: csrfToken,
@@ -68,7 +68,7 @@ describe("Todo test cases ", () => {
     expect(response.statusCode).toBe(302); //http status code
   });
 
-  test("Mark todo as completed (Updating Todo)", async () => {
+  test("Mark todo as completed ", async () => {
     const agent = request.agent(server);
     await login(agent, "user.a@test.com", "123456789");
     let res = await agent.get("/todos");
